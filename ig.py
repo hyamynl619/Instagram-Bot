@@ -1,12 +1,24 @@
 ### Import Libraries
-
-from time import sleep
+import os
 from selenium import webdriver
 
-def test_login_page(browser):
-    home_page = HomePage(browser)
-    login_page = home_page.go_to_login_page()
-    login_page.login("<__mistyblu>", "<Justme@61925>")
 
-    errors = browser.find_elements_by_css_selector('#error_message')
-    assert len(errors) == 0
+### Write a class for a Instagram Bot
+
+class Instabot:
+    def __init__(self, username, password):
+        self.username= username
+        self.password = password
+
+        ### Crete browser
+        self.driver = webdriver.Firefox()
+        
+        self.login()
+
+### Have Bot automatically login
+    def login(self):
+        self.driver.get('https://www.instagram.comn/accounts/login/')
+        
+        self.driver.find_element_by_name('username').send_keys(self.username)
+        
+        self.driver.find_element_by_name('password').send_keys(self.password)
